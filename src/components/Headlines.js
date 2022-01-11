@@ -18,17 +18,47 @@ class Headlines extends React.Component {
         };
     }
 
-    makeApiCall = () => {
-        
-            // We use the built-in fetch() method (JavaScript, not React) to make our API call. 
-            // The URL for the API call is in backticks so that we can use a template string for 
-            // our API key, which is stored in an environmental variable.
+    render() {
+        // start by deconstructing this.state to extract each of its properties.
+        const {error, isLoaded, headlines } = this.state;
 
-            fetch(`https:/api.nytimes.com/svc/topstories/v2/home.json?api-key=$process.env.REACT_APP_API_KEY}`)
-            
-            // Once the API call is complete, the response will be converted to JSON. 
-            // Then, once it's been converted, we'll have our results.
-            
+        // If there's an error, we'll return an error message.
+        if(error) {
+            return <>Error: {error.message}</>;
+        // if isLoaded is false, we are in the process of loading 
+        // hence render Loading...
+        } else if (!isLoaded) {
+            return <>Loading...</>;
+        } else {
+        // otherwise, we'll return the headlines in an unordered list
+        // with the title and the body using the key as the index
+            return (
+                <>
+            <h1> Headlines: </h1>
+            <ul>
+                {headlines.map((results, index) =>
+                    <li key={index}>
+                        <h3>{results.title}</h3>
+                        <p>{results.abstract}</p>
+                    </li>
+                )}
+            </ul>
+            </>
+        );
+    }
+}
+
+        makeApiCall = () => {
+    
+        // We use the built-in fetch() method (JavaScript, not React) to make our API call. 
+        // The URL for the API call is in backticks so that we can use a template string for 
+        // our API key, which is stored in an environmental variable.
+
+            fetch(`https:/api.nytimes.com/svc/topstories/v2/home.json?api-key=${process.env.REACT_APP_API_KEY}`)
+        
+        // Once the API call is complete, the response will be converted to JSON. 
+        // Then, once it's been converted, we'll have our results.
+        
             .then(response => response.json())
             .then(
                 (jsonifiedResponse) => {
@@ -41,49 +71,21 @@ class Headlines extends React.Component {
                         
                     });
                 })
-                .catch((error) => {
-                    this.setState({
-                        isLoaded: true,
-                        error
-                        // Otherwise, we set isLoaded to true and set the error property
-                        //  to the error that the API call returns
-                    });
+            .catch((error) => {
+                this.setState({
+                    isLoaded: true,
+                    error
+                    // Otherwise, we set isLoaded to true and set the error property
+                    //  to the error that the API call returns
                 });
-            }
+            });
+        }
             
-            compoenentDidMount() {
+            componentDidMount() {
                 this.makeApiCall()
             }
             
-            render() {
-                // start by deconstructing this.state to extract each of its properties.
-                const {error, isLoaded, headlines } = this.state;
-
-                // If there's an error, we'll return an error message.
-                if(error) {
-                    return <>Error: {error.message}</>;
-                // if isLoaded is false, we are in the process of loading 
-                // hence render Loading...
-                } else if (!isLoaded) {
-                    return <>Loading...</>;
-                } else {
-                // otherwise, we'll return the headlines in an unordered list
-                // with the title and the body using the key as the index
-                    return (
-                        <>
-                    <h1> Headlines </h1>
-                    <ul>
-                        {headlines.map((headline, index) =>
-                            <li key={index}>
-                                <h3>{headline.title}</h3>
-                                <p>{headline.abstract}</p>
-                            </li>
-                        )}
-                    </ul>
-                    </>
-                );
-            }
-        }
+            // render() {
         
 };
 
