@@ -56,13 +56,19 @@ class Headlines extends React.Component {
             }
             
             render() {
+                // start by deconstructing this.state to extract each of its properties.
                 const {error, isLoaded, headlines } = this.state;
+
+                // If there's an error, we'll return an error message.
                 if(error) {
-                    // return <React.Fragment>Loading...</React.Fragment>;
                     return <>Error: {error.message}</>;
+                // if isLoaded is false, we are in the process of loading 
+                // hence render Loading...
                 } else if (!isLoaded) {
                     return <>Loading...</>;
                 } else {
+                // otherwise, we'll return the headlines in an unordered list
+                // with the title and the body using the key as the index
                     return (
                         <>
                     <h1> Headlines </h1>
