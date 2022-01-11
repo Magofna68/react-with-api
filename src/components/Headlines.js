@@ -1,4 +1,5 @@
 import React from 'react';
+import '../../src/App.css';
 
 class Headlines extends React.Component {
     constructor(props) {
@@ -34,16 +35,21 @@ class Headlines extends React.Component {
         // with the title and the body using the key as the index
             return (
                 <>
-            <h1> Headlines: </h1>
-            <ul>
-                {headlines.map((results, index) =>
-                    <li key={index}>
-                        <h3>{results.title}</h3>
-                        <p>{results.abstract}</p>
-                    </li>
-                )}
-            </ul>
-            </>
+                    <div className="container">
+                        <div id="infoContainer">
+                        <h1> Headlines: </h1>
+                        <ul>
+                        {headlines.map((results, index) =>
+                            <li key={index}>
+                                <h3>{results.title}</h3>
+                                <p>{results.abstract}</p>
+                                <p>{results.published_date}</p>
+                            </li>
+                         )}
+                        </ul>
+                    </div>
+                    </div>
+                </>
         );
     }
 }
