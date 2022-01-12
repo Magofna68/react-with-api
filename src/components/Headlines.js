@@ -35,15 +35,17 @@ class Headlines extends React.Component {
         // with the title and the body using the key as the index
             return (
                 <>
+                    <h1 id="title">NY Times: <span id="spanTitle">React API Project</span></h1>
                     <div className="container">
+                        <br/><br/>
                         <div id="infoContainer">
-                        <h1> Headlines: </h1>
+                        <h2> Headlines: </h2>
                         <ul>
-                        {headlines.map((results, index) =>
+                        {headlines.slice(0,6).map((results, index) =>
                             <li key={index}>
                                 <h3>{results.title}</h3>
+                                {/* <p>{results.published_date}</p> */}
                                 <p>{results.abstract}</p>
-                                <p>{results.published_date}</p>
                             </li>
                          )}
                         </ul>
