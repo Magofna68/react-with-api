@@ -60,7 +60,7 @@ class Headlines extends React.Component {
         // The URL for the API call is in backticks so that we can use a template string for 
         // our API key, which is stored in an environmental variable.
 
-            fetch(`https:/api.nytimes.com/svc/topstories/v2/home.json?api-key=${process.env.REACT_APP_API_KEY}`)
+            fetch(`https:/api.nytimes.com/svc/topstories/v2/world.json?api-key=${process.env.REACT_APP_API_KEY}`)
         
         // Once the API call is complete, the response will be converted to JSON. 
         // Then, once it's been converted, we'll have our results.
@@ -90,9 +90,7 @@ class Headlines extends React.Component {
             componentDidMount() {
                 this.makeApiCall()
             }
-            
-            // render() {
-        
+                    
 };
 
 
