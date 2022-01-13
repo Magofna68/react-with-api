@@ -36,6 +36,7 @@ class Headlines extends React.Component {
             return (
                 <>
                     <h1 id="title">NY Times: <span id="spanTitle">React API Project</span></h1>
+                    <br/>
                     <div className="container">
                         <br/><br/>
                         <div id="infoContainer">
@@ -43,9 +44,12 @@ class Headlines extends React.Component {
                         <ul>
                         {headlines.slice(0,6).map((results, index) =>
                             <li key={index}>
-                                <h3>{results.title}</h3>
-                                {/* <p>{results.published_date}</p> */}
-                                <p>{results.abstract}</p>
+                                <h3>{results.title} 
+                                    <br/> 
+                                    <span id="titleDate">{results.published_date}</span>
+                                    <br/>
+                                    <span id="desc">{results.abstract}</span>
+                                </h3>
                             </li>
                          )}
                         </ul>
